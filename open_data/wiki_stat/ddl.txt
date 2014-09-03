@@ -1,0 +1,11 @@
+create external table if not exists pagecounts (
+  project_name string,
+  title string,
+  num_req int,
+  size int
+)
+partitioned by (y string, ym string, ymd string, h string)
+row format delimited fields terminated by ' ' lines terminated by '\n'
+stored as textfile location '/user/hive/warehouse/pagecounts/';
+
+alter table pagecounts add partition (y='2014', ym='201406', ymd='20140601', h='00');
